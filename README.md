@@ -17,3 +17,8 @@ for [org.httpkit.client/request](http://www.http-kit.org/client.html#options)
    :query-params {"Action" "ListUsers"
                   "Version" "2010-05-08"}})
 ```
+
+## Credentials
+Uses AWS credentials provided run-time by (in order of precedence)
+- AWS ECS Agent, via AWS_CONTAINER_CREDENTIALS_RELATIVE_URI, when running in an ECS container
+- environment variables AWS_ACCESS_KEY_ID etc
