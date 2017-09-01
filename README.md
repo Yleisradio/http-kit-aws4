@@ -22,3 +22,6 @@ for [org.httpkit.client/request](http://www.http-kit.org/client.html#options)
 Uses AWS credentials provided run-time by (in order of precedence)
 - AWS ECS Agent, via AWS_CONTAINER_CREDENTIALS_RELATIVE_URI, when running in an ECS container
 - environment variables AWS_ACCESS_KEY_ID etc
+
+## Acknowledgements
+This project was inspired by and modeled after [sharetribe/aws-sig4](https://github.com/sharetribe/aws-sig4) - a [clj-http](https://github.com/dakrone/clj-http) middleware for signing AWS requests. Thank you.
