@@ -3,7 +3,6 @@
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :main http-kit-aws4.core
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [buddy "1.3.0"]
                  [camel-snake-kebab "0.4.0"]
