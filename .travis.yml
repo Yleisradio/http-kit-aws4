@@ -10,7 +10,7 @@ before_script:
 - rm .s3_config
 
 script:
-- lein spec
+- lein do spec, lint
 
 cache:
   directories:

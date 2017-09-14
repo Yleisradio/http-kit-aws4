@@ -9,7 +9,16 @@
                  [cheshire "5.7.1"]
                  [clj-time "0.14.0"]
                  [yleisradio/http-kit "2.2.0-sni-support"]]
-  :profiles {:dev {:dependencies [[speclj "3.3.2"]]}}
+  :profiles {:dev {:dependencies [[speclj "3.3.2"]]
+                   :plugins [[jonase/eastwood "0.2.4"]
+                             [lein-kibit "0.1.5"]
+                             [lein-cljfmt "0.5.7"]]
+                   :cljfmt {:indents {around   [[:inner 0]]
+                                      context  [[:inner 0]]
+                                      describe [[:inner 0]]
+                                      it       [[:inner 0]]
+                                      should=  [[:block 0]]}}
+                   }}
   :plugins [[fi.yle.tools/aws-maven "1.4.0"]
             [speclj "3.3.2"]]
   :repositories [["yle-public" "http://maven.c4.yle.fi/release"]
@@ -23,4 +32,5 @@
                                :snapshots     true
                                :username      ""
                                :password      ""}]]
-  :test-paths ["spec"])
+  :test-paths ["spec"]
+  :aliases {"lint" ["with-profile" "dev" "do" ["cljfmt" "check"] ["eastwood"] ["kibit"]]})
