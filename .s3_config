@@ -1,0 +1,2 @@
+AWS_ASSUME_ROLE_NAME=dev
+AWS_ASSUME_ROLE_ARN=arn:aws:iam::352476883983:role/dev

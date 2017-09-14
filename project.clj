@@ -10,5 +10,17 @@
                  [clj-time "0.14.0"]
                  [yleisradio/http-kit "2.2.0-sni-support"]]
   :profiles {:dev {:dependencies [[speclj "3.3.2"]]}}
-  :plugins [[speclj "3.3.2"]]
+  :plugins [[fi.yle.tools/aws-maven "1.4.0"]
+            [speclj "3.3.2"]]
+  :repositories [["yle-public" "http://maven.c4.yle.fi/release"]
+                 ["releases" {:url           "s3://yle-maven-private/release"
+                              :sign-releases false
+                              :snapshots     false
+                              :username      ""
+                              :password      ""}]
+                 ["snapshots" {:url           "s3://yle-maven-private/snapshot"
+                               :sign-releases false
+                               :snapshots     true
+                               :username      ""
+                               :password      ""}]]
   :test-paths ["spec"])
