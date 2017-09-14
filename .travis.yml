@@ -6,9 +6,6 @@ jdk:
 
 install: true
 
-before_script:
-- rm .s3_config
-
 script:
 - lein do spec, lint
 
