@@ -9,7 +9,7 @@
     (should=
       [["x-not-borked" "foo"]]
       (#'http-kit-aws4.http-kit/normalized-headers {:headers {"x-borked" nil
-                                                         "x-not-borked" "foo"}}))))
+                                                              "x-not-borked" "foo"}}))))
 
 ;; https://docs.aws.amazon.com/general/latest/gr/signature-v4-test-suite.html#signature-v4-test-suite-example
 (describe "canonical-request"
