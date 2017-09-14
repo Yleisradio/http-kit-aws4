@@ -1,0 +1,14 @@
+sudo: false
+language: clojure
+lein: 2.6.1
+jdk:
+- oraclejdk8
+
+install: true
+
+script:
+- lein spec
+
+cache:
+  directories:
+  - "$HOME/.m2"
