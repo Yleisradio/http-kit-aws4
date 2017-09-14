@@ -6,6 +6,22 @@ Provides `aws4-request`,
 a [aws4-signature](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)-providing wrapper
 for [org.httpkit.client/request](http://www.http-kit.org/client.html#options)
 
+## Installation
+To access Yle private maven repository in S3, place this `.s3_config` in project root:
+```
+AWS_ASSUME_ROLE_NAME=dev
+AWS_ASSUME_ROLE_ARN=arn:aws:iam::352476883983:role/dev
+```
+
+Then, in `project.clj`:
+```clojure
+ (defproject your-project
+   :plugins [[fi.yle.tools/aws-maven "1.4.0"]]
+   :repositories [["yle-public" "http://maven.c4.yle.fi/release"]
+                  ["yle-private" "s3://yle-maven-private/release"]]
+   :dependencies [[http-kit-aws4 "0.1.0"]])
+```
+
 ## Usage
 ```clojure
 (:require [http-kit-aws4.http-kit :refer [aws4-request]])
