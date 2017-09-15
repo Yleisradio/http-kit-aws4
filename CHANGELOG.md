@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - CHANGELOG
 
 ### Changed
+- Upgraded outdated dependencies:
+```
+[buddy "2.0.0"] is available but we use "1.3.0"
+[cheshire "5.8.0"] is available but we use "5.7.1"
+```
 
 ### Removed
 
