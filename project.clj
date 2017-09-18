@@ -21,7 +21,7 @@
                    }}
   :plugins [[fi.yle.tools/aws-maven "1.4.0"]
             [speclj "3.3.2"]]
-  :repositories [["yle-public" "http://maven.c4.yle.fi/release"]]
+  :repositories [["yle-public" "https://maven.yle.fi/release"]]
   :deploy-repositories [["releases" {:url           "s3://maven.c4.yle.fi/release"
                                      :sign-releases false
                                      :snapshots     false
