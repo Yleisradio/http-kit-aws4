@@ -4,7 +4,9 @@
             [buddy.core.hash :as hash]
             [http-kit-aws4.aws-credentials :refer [get-aws-credentials]]
             [http-kit-aws4.core :refer [authorization request-date x-amz-date]]
-            [org.httpkit.client :as http-client]))
+            [org.httpkit.client :as http-client])
+  (:import [java.net URI]
+           [javax.net.ssl SNIHostName SSLEngine SSLParameters]))
 
 (defn- http-request-method [request]
   (-> (:method request)
@@ -111,8 +113,22 @@
     (update-in request [:headers] merge {"X-Amz-Security-Token" session-token})
     request))
 
+(defn- sni-enabled-ssl-configurer
+  [^SSLEngine ssl-engine ^URI uri]
+  (let [^SSLParameters ssl-params (.getSSLParameters ssl-engine)]
+    (.setServerNames ssl-params [(SNIHostName. (.getHost uri))])
+    (.setSSLParameters ssl-engine ssl-params)
+    (.setUseClientMode ssl-engine true)))
+
+(defn- sni-enabled-client
+  []
+  (http-client/make-client {:ssl-configurer sni-enabled-ssl-configurer}))
+
+(defonce client (sni-enabled-client))
+
 (defn aws4-request [region service options]
-  (let [{:keys [access-key-id secret-access-key token]} (get-aws-credentials)]
+  (let [{:keys [access-key-id secret-access-key token]} (get-aws-credentials)
+        options (assoc options :client client)]
     (->> options
          (with-session-token token)
          (signed-request access-key-id
