@@ -1,4 +1,4 @@
-(defproject http-kit-aws4 "0.1.1"
+(defproject http-kit-aws4 "0.1.2-alpha"
   :description "AWS Request Signing v4 for http-kit"
   :url "https://github.com/Yleisradio/http-kit-aws4"
   :license {:name "MIT License"
@@ -8,7 +8,7 @@
                  [camel-snake-kebab "0.4.0"]
                  [cheshire "5.8.0"]
                  [clj-time "0.14.0"]
-                 [yleisradio/http-kit "2.2.0-sni-support"]]
+                 [http-kit "2.4.0-alpha3"]]
   :profiles {:dev {:dependencies [[speclj "3.3.2"]]
                    :plugins [[jonase/eastwood "0.2.4"]
                              [lein-kibit "0.1.5"]

@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.2-alpha]
+### Changed:
+- Updated httpkit to 2.4-alpha3 to support JDK 11
+- Version kept at alpha until httpkit changes are released
+
 ## [0.1.1]
 ### Added
 - README: Licence
