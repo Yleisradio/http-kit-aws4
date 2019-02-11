@@ -19,7 +19,7 @@
                                       it       [[:inner 0]]
                                       should=  [[:block 0]]}}
                    }}
-  :plugins [[fi.yle.tools/aws-maven "1.4.0"]
+  :plugins [[fi.yle.tools/aws-maven "1.4.2"]
             [speclj "3.3.2"]]
   :repositories [["yle-public" "https://maven.yle.fi/release"]]
   :deploy-repositories [["releases" {:url           "s3://maven.c4.yle.fi/release"
