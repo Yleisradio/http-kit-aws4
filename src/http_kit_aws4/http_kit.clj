@@ -24,12 +24,12 @@
 
 (defn- canonical-query-string [request]
   (if (:query-params request)
-      (->> (or (:query-params request) {})
-           (clojure.walk/stringify-keys)
-           (into (sorted-map))
-           (map (fn [[k v]] (str k "=" v)))
-           (str/join "&"))
-      (get-url-params (:url request))))
+    (->> (or (:query-params request) {})
+         (clojure.walk/stringify-keys)
+         (into (sorted-map))
+         (map (fn [[k v]] (str k "=" v)))
+         (str/join "&"))
+    (get-url-params (:url request))))
 
 (defn- normalized-headers [request]
   (->> (or (:headers request) {})
