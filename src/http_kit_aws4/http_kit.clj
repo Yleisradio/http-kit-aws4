@@ -8,6 +8,9 @@
   (:import [java.net URI]
            [javax.net.ssl SNIHostName SSLEngine SSLParameters]))
 
+(defn- get-url-params [url]
+  (second (str/split url #"\?")))
+
 (defn- http-request-method [request]
   (-> (:method request)
       (or :get)
@@ -20,11 +23,13 @@
     "/"))
 
 (defn- canonical-query-string [request]
-  (->> (or (:query-params request) {})
-       (clojure.walk/stringify-keys)
-       (into (sorted-map))
-       (map (fn [[k v]] (str k "=" v)))
-       (str/join "&")))
+  (if (:query-params request)
+      (->> (or (:query-params request) {})
+           (clojure.walk/stringify-keys)
+           (into (sorted-map))
+           (map (fn [[k v]] (str k "=" v)))
+           (str/join "&"))
+      (get-url-params (:url request))))
 
 (defn- normalized-headers [request]
   (->> (or (:headers request) {})
