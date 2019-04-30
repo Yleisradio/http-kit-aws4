@@ -32,6 +32,24 @@
                             :headers {"X-Amz-Date" "20150830T123600Z"
                                       "Host" "example.amazonaws.com"}}))))
 
+  (it "A Simple GET Request with url including query-params in the wrong order"
+    (let [expected "GET\n/\nParam1=value1&Param2=value2\nhost:example.amazonaws.com\nx-amz-date:20150830T123600Z\n\nhost;x-amz-date\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"]
+      (should=
+        expected
+        (canonical-request {:url "http://example.amazonaws.com/?Param2=value2&Param1=value1"
+                            :method :get
+                            :headers {"X-Amz-Date" "20150830T123600Z"
+                                      "Host" "example.amazonaws.com"}}))))
+
+  (it "A Simple GET Request with a bad url"
+    (let [expected "GET\n/\n\nhost:example.amazonaws.com\nx-amz-date:20150830T123600Z\n\nhost;x-amz-date\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"]
+      (should=
+        expected
+        (canonical-request {:url "http://example.amazonaws.com/??Param1=value1&&"
+                            :method :get
+                            :headers {"X-Amz-Date" "20150830T123600Z"
+                                      "Host" "example.amazonaws.com"}}))))
+
   (it "post-x-www-form-urlencoded"
     (let [expected "POST\n/\n\ncontent-type:application/x-www-form-urlencoded\ndate:Mon, 09 Sep 2011 23:36:00 GMT\nhost:host.foo.com\n\ncontent-type;date;host\n3ba8907e7a252327488df390ed517c45b96dead033600219bdca7107d1d3f88a"]
       (should=

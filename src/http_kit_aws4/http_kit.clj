@@ -8,8 +8,28 @@
   (:import [java.net URI]
            [javax.net.ssl SNIHostName SSLEngine SSLParameters]))
 
-(defn- get-url-params [url]
-  (second (str/split url #"\?")))
+(defn- url->canonical-query-string
+  "Deals with query parameters included in the url"
+  [url]
+  (let [params-string (second (str/split url #"\?"))]
+    (when params-string
+      (->>
+       (str/split params-string #"&")
+       (remove str/blank?)
+       (remove nil?)
+       (map #(str/split % #"="))
+       (into (sorted-map))
+       (map (fn [[k v]] (str k "=" v)))
+       (str/join "&")))))
+
+(defn- query-params->canonical-query-string
+  "Transforms query params provided on a map"
+  [query-params-map]
+  (->>  (or query-params-map {})
+        (clojure.walk/stringify-keys)
+        (into (sorted-map))
+        (map (fn [[k v]] (str k "=" v)))
+        (str/join "&")))
 
 (defn- http-request-method [request]
   (-> (:method request)
@@ -24,12 +44,8 @@
 
 (defn- canonical-query-string [request]
   (if (:query-params request)
-    (->> (or (:query-params request) {})
-         (clojure.walk/stringify-keys)
-         (into (sorted-map))
-         (map (fn [[k v]] (str k "=" v)))
-         (str/join "&"))
-    (get-url-params (:url request))))
+    (query-params->canonical-query-string (:query-params request))
+    (url->canonical-query-string (:url request))))
 
 (defn- normalized-headers [request]
   (->> (or (:headers request) {})
