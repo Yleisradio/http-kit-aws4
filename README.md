@@ -11,7 +11,7 @@ In `project.clj`:
 ```clojure
  (defproject your-project
    :repositories [["yle-public" "https://maven.yle.fi/release"]]
-   :dependencies [[http-kit-aws4 "0.1.1"]])
+   :dependencies [[http-kit-aws4 "0.2.0"]])
 ```
 
 ## Usage
