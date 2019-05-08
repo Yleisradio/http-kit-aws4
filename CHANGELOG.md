@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0]
+### Changed:
+- Update AWS Maven wagon version
+### Fixed:
+- Query parameters included in request :url are now included in canonical-request (#10)
+
 ## [0.1.2-alpha]
 ### Changed:
 - Updated httpkit to 2.4-alpha3 to support JDK 11
@@ -28,4 +34,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Initial release
 
 [Unreleased]: https://github.com/Yleisradio/http-kit-aws4/compare/v0.1.1...HEAD
+[0.2.0]: https://github.com/Yleisradio/http-kit-aws4/compare/v0.1.2-alpha...v0.2.0
+[0.1.2-alpha]: https://github.com/Yleisradio/http-kit-aws4/compare/v0.1.1...v0.1.2-alpha
 [0.1.1]: https://github.com/Yleisradio/http-kit-aws4/compare/v0.1.0...v0.1.1
