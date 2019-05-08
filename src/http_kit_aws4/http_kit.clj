@@ -1,5 +1,5 @@
 (ns http-kit-aws4.http-kit
-  (:require [clojure.string :as str]
+  (:require [clojure.string :as string]
             [buddy.core.codecs :as codecs]
             [buddy.core.hash :as hash]
             [http-kit-aws4.aws-credentials :refer [get-aws-credentials]]
@@ -8,41 +8,62 @@
   (:import [java.net URI]
            [javax.net.ssl SNIHostName SSLEngine SSLParameters]))
 
+(defn arg-map->canonical-query-string [arg-map]
+  (->> arg-map
+       (into (sorted-map))
+       (map (fn [[k v]] (str k "=" v)))
+       (string/join "&")))
+
+(defn- url->canonical-query-string
+  "Transforms query parameters included in the url"
+  [url]
+  (when-let [params-string (second (string/split url #"\?"))]
+    (->>
+     (string/split params-string #"&")
+     (remove string/blank?)
+     (map #(string/split % #"="))
+     (arg-map->canonical-query-string))))
+
+(defn- query-params->canonical-query-string
+  "Transforms query params provided on a map"
+  [query-params-map]
+  (->>  (or query-params-map {})
+        (clojure.walk/stringify-keys)
+        (arg-map->canonical-query-string)))
+
 (defn- http-request-method [request]
   (-> (:method request)
       (or :get)
       (name)
-      (str/upper-case)))
+      (string/upper-case)))
 
 (defn- canonical-uri [request]
   (if-let [url (:url request)]
     (.getPath (clojure.java.io/as-url url))
     "/"))
 
-(defn- canonical-query-string [request]
-  (->> (or (:query-params request) {})
-       (clojure.walk/stringify-keys)
-       (into (sorted-map))
-       (map (fn [[k v]] (str k "=" v)))
-       (str/join "&")))
+(defn- canonical-query-string [{:keys [query-params url]}]
+  (if query-params
+    (query-params->canonical-query-string query-params)
+    (url->canonical-query-string url)))
 
 (defn- normalized-headers [request]
   (->> (or (:headers request) {})
        (remove (fn [[k v]] (nil? v)))
        (map (fn [[k v]]
-              [(str/lower-case k)
-               (str/trim v)]))
+              [(string/lower-case k)
+               (string/trim v)]))
        (sort-by first)))
 
 (defn- canonical-headers [request]
   (->> (normalized-headers request)
        (map (fn [[k v]] (str k ":" v "\n")))
-       (str/join)))
+       (string/join)))
 
 (defn- signed-headers [request]
   (->> (normalized-headers request)
        (map first)
-       (str/join ";")))
+       (string/join ";")))
 
 (defn- hashed-payload [request]
   (->> (or (:body request) "")
@@ -76,7 +97,7 @@
               canonical-headers
               signed-headers
               hashed-payload))
-       (str/join "\n")))
+       (string/join "\n")))
 
 (defn- ensure-host-header [request]
   (assoc-in request [:headers "Host"] (request->host request)))
