@@ -22,15 +22,15 @@
   :plugins [[fi.yle.tools/aws-maven "1.4.2"]
             [speclj "3.3.2"]]
   :repositories [["yle-public" "https://maven.yle.fi/release"]]
-  :deploy-repositories [["releases" {:url           "s3://maven.c4.yle.fi/release"
+  :deploy-repositories [["releases" {:url           "https://maven.pkg.github.com/yleisradio/ovp-cljfmt"
                                      :sign-releases false
                                      :snapshots     false
-                                     :username      ""
-                                     :password      ""}]
-                        ["snapshots" {:url           "s3://maven.c4.yle.fi/snapshot"
+                                     :username      "yleisradio-travis-ci"
+                                     :password      :env/github_token}]
+                        ["snapshots" {:url           "https://maven.pkg.github.com/yleisradio/ovp-cljfmt"
                                       :sign-releases false
                                       :snapshots     true
-                                      :username      ""
-                                      :password      ""}]]
+                                      :username      "yleisradio-travis-ci"
+                                      :password      :env/github_token}]]
   :test-paths ["spec"]
   :aliases {"lint" ["with-profile" "dev" "do" ["cljfmt" "check"] ["eastwood"] ["kibit"]]})
