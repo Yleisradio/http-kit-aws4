@@ -2,7 +2,7 @@ sudo: false
 language: clojure
 lein: 2.6.1
 jdk:
-- openjdk10
+- openjdk11
 
 install: true
 
