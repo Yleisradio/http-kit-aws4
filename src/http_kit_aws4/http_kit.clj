@@ -1,5 +1,7 @@
 (ns http-kit-aws4.http-kit
-  (:require [clojure.string :as string]
+  (:require [clojure.java.io]
+            [clojure.string :as string]
+            [clojure.walk]
             [buddy.core.codecs :as codecs]
             [buddy.core.hash :as hash]
             [http-kit-aws4.aws-credentials :refer [get-aws-credentials]]

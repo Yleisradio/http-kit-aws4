@@ -10,7 +10,7 @@
                  [clj-time "0.14.0"]
                  [http-kit "2.4.0-alpha3"]]
   :profiles {:dev {:dependencies [[speclj "3.3.2"]]
-                   :plugins [[jonase/eastwood "0.2.4"]
+                   :plugins [[jonase/eastwood "0.3.11"]
                              [lein-kibit "0.1.5"]
                              [lein-cljfmt "0.5.7"]]
                    :cljfmt {:indents {around   [[:inner 0]]
