@@ -10,7 +10,7 @@ for [org.httpkit.client/request](http://www.http-kit.org/client.html#options)
 In `project.clj`:
 ```clojure
  (defproject your-project
-   :repositories [["yle-public" "https://maven.yle.fi/release"]]
+   :repositories [["http-kit-aws4" "https://maven.pkg.github.com/yleisradio/http-kit-aws4"]]
    :dependencies [[http-kit-aws4 "0.2.0"]])
 ```
 

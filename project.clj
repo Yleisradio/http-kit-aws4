@@ -25,12 +25,10 @@
   :deploy-repositories [["releases" {:url           "https://maven.pkg.github.com/yleisradio/http-kit-aws4"
                                      :sign-releases false
                                      :snapshots     false
-                                     :username      "yleisradio-travis-ci"
-                                     :password      :env/github_token}]
+                                     :creds         :gpg}]
                         ["snapshots" {:url           "https://maven.pkg.github.com/yleisradio/http-kit-aws4"
                                       :sign-releases false
                                       :snapshots     true
-                                      :username      "yleisradio-travis-ci"
-                                      :password      :env/github_token}]]
+                                      :creds         :gpg}]]
   :test-paths ["spec"]
   :aliases {"lint" ["with-profile" "dev" "do" ["cljfmt" "check"] ["eastwood"] ["kibit"]]})
