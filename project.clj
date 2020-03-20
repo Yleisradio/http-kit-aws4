@@ -10,7 +10,7 @@
                  [clj-time "0.14.0"]
                  [http-kit "2.4.0-alpha3"]]
   :profiles {:dev {:dependencies [[speclj "3.3.2"]]
-                   :plugins [[jonase/eastwood "0.2.4"]
+                   :plugins [[jonase/eastwood "0.3.11"]
                              [lein-kibit "0.1.5"]
                              [lein-cljfmt "0.5.7"]]
                    :cljfmt {:indents {around   [[:inner 0]]
@@ -22,15 +22,13 @@
   :plugins [[fi.yle.tools/aws-maven "1.4.2"]
             [speclj "3.3.2"]]
   :repositories [["yle-public" "https://maven.yle.fi/release"]]
-  :deploy-repositories [["releases" {:url           "s3://maven.c4.yle.fi/release"
+  :deploy-repositories [["releases" {:url           "https://maven.pkg.github.com/yleisradio/http-kit-aws4"
                                      :sign-releases false
                                      :snapshots     false
-                                     :username      ""
-                                     :password      ""}]
-                        ["snapshots" {:url           "s3://maven.c4.yle.fi/snapshot"
+                                     :creds         :gpg}]
+                        ["snapshots" {:url           "https://maven.pkg.github.com/yleisradio/http-kit-aws4"
                                       :sign-releases false
                                       :snapshots     true
-                                      :username      ""
-                                      :password      ""}]]
+                                      :creds         :gpg}]]
   :test-paths ["spec"]
   :aliases {"lint" ["with-profile" "dev" "do" ["cljfmt" "check"] ["eastwood"] ["kibit"]]})
