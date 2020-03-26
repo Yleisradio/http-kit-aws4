@@ -22,13 +22,11 @@
   :plugins [[fi.yle.tools/aws-maven "1.4.2"]
             [speclj "3.3.2"]]
   :repositories [["yle-public" "https://maven.yle.fi/release"]]
-  :deploy-repositories [["releases" {:url           "https://maven.pkg.github.com/yleisradio/http-kit-aws4"
+  :deploy-repositories [["releases" {:url           "https://maven.pkg.github.com/yleisradio/http-kit-aws4" :creds :gpg
                                      :sign-releases false
-                                     :snapshots     false
-                                     :creds         :gpg}]
-                        ["snapshots" {:url           "https://maven.pkg.github.com/yleisradio/http-kit-aws4"
+                                     :snapshots     false}]
+                        ["snapshots" {:url           "https://maven.pkg.github.com/yleisradio/http-kit-aws4" :creds :gpg
                                       :sign-releases false
-                                      :snapshots     true
-                                      :creds         :gpg}]]
+                                      :snapshots     true}]]
   :test-paths ["spec"]
   :aliases {"lint" ["with-profile" "dev" "do" ["cljfmt" "check"] ["eastwood"] ["kibit"]]})

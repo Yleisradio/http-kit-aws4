@@ -5,6 +5,9 @@ jdk:
 
 install: true
 
+before_install:
+  - sed --in-place "s|:creds :gpg|:username \"yleisradio-travis-ci\" :password :env/github_token|" project.clj
+
 script:
 - lein do spec, lint
 
