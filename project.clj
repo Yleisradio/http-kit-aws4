@@ -1,4 +1,4 @@
-(defproject http-kit-aws4 "0.2.0"
+(defproject http-kit-aws4 "0.3.0-SNAPSHOT"
   :description "AWS Request Signing v4 for http-kit"
   :url "https://github.com/Yleisradio/http-kit-aws4"
   :license {:name "MIT License"
