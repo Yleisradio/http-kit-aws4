@@ -1,9 +1,10 @@
-(defproject http-kit-aws4 "0.2.0"
+(defproject http-kit-aws4 "0.3.0"
   :description "AWS Request Signing v4 for http-kit"
   :url "https://github.com/Yleisradio/http-kit-aws4"
   :license {:name "MIT License"
             :url "http://www.opensource.org/licenses/mit-license.php"}
   :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/core.memoize "1.0.236"]
                  [buddy "2.0.0"]
                  [camel-snake-kebab "0.4.0"]
                  [cheshire "5.8.0"]

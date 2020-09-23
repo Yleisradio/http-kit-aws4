@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0]
+### Fixed:
+- Issue #11 fixed by caching AWS credentials in memory for 60 seconds
+
 ## [0.2.0]
 ### Changed:
 - Update AWS Maven wagon version
