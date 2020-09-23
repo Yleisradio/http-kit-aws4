@@ -1,5 +1,6 @@
 (ns http-kit-aws4.aws-credentials
   (:require [cheshire.core :as json]
+            [clojure.core.memoize :as memo]
             [org.httpkit.client :as http-client]
             [camel-snake-kebab.core :refer [->kebab-case-keyword]]))
 
@@ -22,7 +23,7 @@
    :secret-access-key  (System/getenv "AWS_SECRET_ACCESS_KEY")
    :token              (System/getenv "AWS_SESSION_TOKEN")})
 
-(defn get-aws-credentials
+(defn- get-aws-credentials!
   "Returns a map of AWS credentials provided by (in order of precedence)
   - AWS ECS Agent, via AWS_CONTAINER_CREDENTIALS_RELATIVE_URI, when running in an ECS container
   - environment variables AWS_ACCESS_KEY_ID etc"
@@ -30,3 +31,6 @@
   (if aws-container-credentials-url
     (get-aws-container-credentials aws-container-credentials-url)
     aws-environment-credentials))
+
+(def get-aws-credentials
+  (memo/ttl get-aws-credentials! :ttl/threshold 60000))
