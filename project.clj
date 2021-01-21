@@ -1,4 +1,4 @@
-(defproject http-kit-aws4 "0.3.0"
+(defproject yleisradio/http-kit-aws4 "0.3.0"
   :description "AWS Request Signing v4 for http-kit"
   :url "https://github.com/Yleisradio/http-kit-aws4"
   :license {:name "MIT License"
@@ -23,5 +23,7 @@
   :plugins [[fi.yle.tools/aws-maven "1.4.2"]
             [speclj "3.3.2"]]
   :repositories [["yle-public" "https://maven.yle.fi/release"]]
+  :deploy-repositories [["clojars" {:url "https://clojars.org/repo"
+                                    :sign-releases false}]]
   :test-paths ["spec"]
   :aliases {"lint" ["with-profile" "dev" "do" ["cljfmt" "check"] ["eastwood"] ["kibit"]]})
