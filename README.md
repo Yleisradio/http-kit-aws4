@@ -1,4 +1,6 @@
-# http-kit-aws4
+# OBSOLETE
+
+This project is no longer maintained.
 
 AWS Request Signing v4 for http-kit
 
